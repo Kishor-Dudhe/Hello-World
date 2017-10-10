@@ -1,0 +1,292 @@
+#Categories.impex
+#==============================================================
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+$productCatalogName=hk Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;100
+;200
+;300
+;400
+;500
+;101
+;102
+;103
+;104
+;105
+;106
+;201
+;202
+;203
+;204
+;301
+;302
+;401
+;402
+;403
+;404
+;405
+;406
+;407
+;408
+;409
+;410
+;501
+;502
+;503
+;504
+;505
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;101;100
+;102;100
+;103;100
+;104;100
+;105;100
+;106;100
+;201;200
+;202;200
+;203;200
+;204;200
+;301;300
+;302;300
+;401;400
+;402;400
+;403;400
+;404;400
+;405;400
+;406;400
+;407;400
+;408;400
+;409;400
+;410;400
+;501;500
+;502;500
+;503;500
+;504;500
+;505;500
+#=====================================================
+#categories_en.impex
+#=====================================================
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+$productCatalogName=hk Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+;100;;Handgun Parts
+;101;;Slide Parts
+;102;;Frame Parts
+;103;;Magazines
+;104;;Barrels
+;105;;Sights
+;106;;Acessories
+;200;;Rifle Parts
+;201;;Upper Receiver Parts
+;202;;Lower Receiver Parts
+;203;;Magazines
+;204;;Accessories
+;300;;Knives
+;301;;Fixed
+;302;;Folding
+;400;;Accessories
+;401;;Bags/Cases
+;402;;Drinkware
+;403;;Patches/Decals
+;404;;Cleaning
+;405;;Posters
+;406;;Holsters
+;407;;Lights/Lasers
+;408;;Collectables
+;409;;Rifle
+;410;;Handgun
+;500;;Apparel
+;501;;Shirts
+;502;;Hats
+;503;;Outwear
+;504;;Womens
+;505;;Mens
+#=====================================================
+#products.impex
+#=====================================================
+
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+$productCatalogName=hk Product Catalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+;708287;400;HK;HK Coffe Cup;pieces;
+;708320;400;HK;hk griff pack;pieces;
+;708009;500;HK;HK khaki hat;pieces;
+;708327;500;HK;HK Est.1949 T-shirt;pieces;
+;216169R;100;HK;USP Match Trigger Kit;pieces;
+;217813;100;HK;USP357 Compact Barrel;pieces;
+;229970S;100;HK;VP40/P30 10rd Magazine;pieces;
+;241594;100;HK;HK40 Ambi Safety Kit;pieces;
+;245602;100;HK;VP9 Threaded Barrel;pieces;
+;233210;200;HK;HK Front sight HK416/MR;pieces;
+;235690S;200;HK;MR556 30rd Polymer Magazine;pieces;
+;251450;200;HK;HK Vertical Foregrip;pieces;
+
+#=====================================================
+#products_en.impex
+#=====================================================
+# ImpEx for Importing Product Localisations
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+$productCatalogName=hk Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+# Language
+$lang=en
+
+# Update allProducts with localisations
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+;708287;;HK coffe Mug;A mug for drinks or pens;"<p>A Cofee Mug</p>";
+;708320;;HK Griff Pack;A Griff pack;"<p>A Griff pack</p>";
+;708009;;HK Khaki Hat;HK Khaki Hat;"<p>A Khaki hat</p>";
+;708327;;HK Est.1949 T-shirt;"<P>A T-shirt</p>";
+;216169R;;USP Match Trigger Kit;"<p>USP Match Trigger Kit</p>";
+;217813;;USP357 Compact Barrel;"<p>USP357 Compact Barrel</p>";
+;229970S;;VP40/P30 10rd Magazine;"<p>VP40/P30 10rd Magazine</p>";
+;241594;;HK40 Ambi Safety Kit;"<p>HK40 Ambi Safety Kit</p>";
+;245602;;VP9 Threaded Barrel;"<p>VP9 Threaded Barrel</p>";
+;233210;;HK Front sight HK416/MR;"<p>HK Front sight HK416/MR</p>";
+;235690S;;MR556 30rd Polymer Magazine;"<p>MR556 30rd Polymer Magazine</p>";
+;251450;;HK Vertical Foregrip;"<p>HK Vertical Foregrip</p>";
+
+
+
+$approved=approvalstatus(code)[default='approved']
+INSERT_UPDATE Product;code[unique=true];$approved
+;708287;
+;708320;
+;708009;
+;708327;
+;216169R
+;217813;
+;229970S
+;241594;
+;245602;
+;233210;
+;235690S
+;251450;
+
+
+#=========================================================
+#products-prices.impex
+#=========================================================
+# ImpEx for Importing Prices
+
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+
+UPDATE Product;code[unique=true];$prices;$approved;$catalogVersion
+;708287;5,00 GBP, 5,50 EUR, 7,48 USD, 765,33 JPY
+;708320;4,0 GBP, 1,50 EUR, 2,48 USD, 121,33 JPY
+;708009;1,00 GBP, 1,50 EUR, 1,48 USD, 165,33 JPY
+;708327;2,00 GBP, 2,50 EUR, 2,48 USD, 265,33 JPY
+;216169R;3,00 GBP, 3,50 EUR, 3,48 USD, 365,33 JPY
+;217813;6,00 GBP, 6,50 EUR, 6,48 USD, 665,33 JPY
+;229970S;1,0 GBP, 5,5 EUR, 7,4 USD, 76,33 JPY
+;241594;5,00 GBP, 2,50 EUR, 2,8 USD, 75,33 JPY
+;245602;5,00 GBP, 5,50 EUR, 7,48 USD, 765,33 JPY
+;233210;5,00 GBP, 5,50 EUR, 7,48 USD, 765,33 JPY
+;235690S;5,00 GBP, 5,50 EUR, 7,48 USD, 765,33 JPY
+;251450;5,00 GBP, 5,50 EUR, 7,48 USD, 765,33 JPY
+
+#=======================================================
+#products-stocklevels.impex
+#=======================================================
+
+# ImpEx for Importing Products Stock Levels and Warehouses
+
+# Macros / Replacement Parameter definitions
+$productCatalog=hkProductCatalog
+$productCatalogName=hk Product Catalog
+$vendor=hybris
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+INSERT_UPDATE Vendor;code[unique=true]
+;hybris;Hybris;Hybris
+
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default[default=true]
+;hk_warehouse;hybris;
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);productCode[unique=true];reserved
+;100;hk_warehouse;forceInStock;708287;0
+;100;hk_warehouse;forceInStock;708320;0
+;100;hk_warehouse;forceInStock;708009;0
+;100;hk_warehouse;forceInStock;708327;0
+;100;hk_warehouse;forceInStock;216169R;0
+;100;hk_warehouse;forceInStock;217813;0
+;100;hk_warehouse;forceInStock;229970S;0
+;100;hk_warehouse;forceInStock;241594;0
+;100;hk_warehouse;forceInStock;245602;0
+;100;hk_warehouse;forceInStock;233210;0
+;100;hk_warehouse;forceInStock;235690S;0
+;100;hk_warehouse;forceInStock;251450;0
+
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;708287;;708287:hk_warehouse;$hybris
+;708320;;708320:hk_warehouse;$hybris
+;708009;;708009:hk_warehouse;$hybris
+;708327;;708327:hk_warehouse;$hybris
+;216169R;;216169R:hk_warehouse;$hybris
+;217813;;217813:hk_warehouse;$hybris
+;229970S;;229970S:hk_warehouse;$hybris
+;241594;;241594:hk_warehouse;$hybris
+;245602;;245602:hk_warehouse;$hybris
+;233210;;233210:hk_warehouse;$hybris
+;235690S;;235690S:hk_warehouse;$hybris
+;251450;;251450:hk_warehouse;$hybris
+
+
+#================================================
+#warehouses.impex
+#================================================
+
+$storeUid=hk
+
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUid;hk_warehouse
+
+
+
+
+
+
+#===================================================================
+
+
